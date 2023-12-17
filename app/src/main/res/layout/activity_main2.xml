@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetallMonument">
+    tools:context="com.uvic.ad32023.pTort.DetallMonument">
 
     <TextView
         android:id="@+id/nom"

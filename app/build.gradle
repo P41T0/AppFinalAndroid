@@ -11,7 +11,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.example.projectefinal"
+        applicationId "com.uvic.ad32023.pTort"
         minSdk 26
         targetSdk 34
         versionCode 1

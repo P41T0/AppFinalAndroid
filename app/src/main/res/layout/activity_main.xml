@@ -5,7 +5,7 @@
     android:id="@+id/constIni"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaPrincipal">
+    tools:context="com.uvic.ad32023.pTort.PantallaPrincipal">
 
     <TextView
         android:id="@+id/textView"

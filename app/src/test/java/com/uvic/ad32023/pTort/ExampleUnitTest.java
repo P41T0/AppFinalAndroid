@@ -1,4 +1,4 @@
-package com.example.projectefinal;
+package com.uvic.ad32023.pTort;
 
 import org.junit.Test;
 

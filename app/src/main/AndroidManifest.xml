@@ -10,7 +10,7 @@
     <uses-permission android:name="com.miui.gallery.permission.MIUI_GALLERY_PROVIDER" />
 
     <application
-        android:name=".Singletone.IniciadorSingletone"
+        android:name="com.uvic.ad32023.pTort.Singletone.IniciadorSingletone"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,7 +21,7 @@
         android:theme="@style/Theme.ProjecteFinal"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen"
+            android:name="com.uvic.ad32023.pTort.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
             <intent-filter>
@@ -35,21 +35,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CanviDescs"
+            android:name="com.uvic.ad32023.pTort.CanviDescs"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DetallMonument"
+            android:name="com.uvic.ad32023.pTort.DetallMonument"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaPrincipal"
+            android:name="com.uvic.ad32023.pTort.PantallaPrincipal"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,4 @@
-package com.example.projectefinal.Entities;
-
-import android.graphics.drawable.Drawable;
+package com.uvic.ad32023.pTort.Entities;
 
 import java.io.Serializable;
 

@@ -1,13 +1,8 @@
-package com.example.projectefinal.Adapter;
+package com.uvic.ad32023.pTort.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.DetallMonument;
 import com.example.projectefinal.R;
+import com.uvic.ad32023.pTort.DetallMonument;
+import com.uvic.ad32023.pTort.Entities.Monument;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
