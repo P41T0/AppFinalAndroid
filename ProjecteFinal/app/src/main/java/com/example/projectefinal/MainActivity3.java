@@ -1,4 +1,4 @@
-package com.example.projectefinal;
+package com.example.pTort;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.Singletone.singletone_monuments;
+import com.example.pTort.Entities.Monument;
+import com.example.pTort.Singletone.singletone_monuments;
 
 import java.util.ArrayList;
 

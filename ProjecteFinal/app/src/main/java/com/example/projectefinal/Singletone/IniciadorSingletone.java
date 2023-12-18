@@ -1,4 +1,4 @@
-package com.example.projectefinal.Singletone;
+package com.example.pTort.Singletone;
 
 import android.app.Application;
 import android.util.Log;

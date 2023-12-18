@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -24,16 +23,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 
 import com.example.projectefinal.R;
 import com.uvic.ad32023.pTort.Entities.Monument;
 import com.uvic.ad32023.pTort.Singletone.singletone_monuments;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DetallMonument extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_WRITE_STORAGE = 3;
@@ -44,6 +45,7 @@ public class DetallMonument extends AppCompatActivity {
     private TextView tipusMon;
     private TextView anyConstr;
     private int numMon;
+    private String temp_img;
     private Context context;
     private static final int RESULT_CAPTURE_IMAGE = 1000;
     private static final int PERMISSION_REQUEST_CAMERA = 1;
@@ -67,13 +69,18 @@ public class DetallMonument extends AppCompatActivity {
             monument = (Monument) i.getSerializableExtra("monument");
             numMon = (int) i.getSerializableExtra("numMon");
             nomMonument.setText(monument.getNom());
-            Drawable drawable = getDrawable(monument.getImatge());
-            imatge.setImageDrawable(drawable);
-
+            if (monument.getUriImg()==null) {
+                Drawable drawable = getDrawable(monument.getImatge());
+                imatge.setImageDrawable(drawable);
+            }
+            else{
+                Uri imgUri = Uri.parse(monument.getUriImg());
+                imatge.setImageURI(imgUri);
+            }
             descripcio.setText(monument.getDescripcio());
-            dataVisita.setText(monument.getDataVisita());
-            tipusMon.setText(monument.getTipusMonument());
-            anyConstr.setText(monument.getAnyConstruccio() + "");
+            dataVisita.setText("Visitat el dia: " + monument.getDataVisita());
+            tipusMon.setText("Tipus de monument: " + monument.getTipusMonument());
+            anyConstr.setText("Construït l'any "+ monument.getAnyConstruccio() + "");
         }
     }
 
@@ -178,9 +185,9 @@ public class DetallMonument extends AppCompatActivity {
         nomMonument.setText(monument.getNom());
 
         descripcio.setText(monument.getDescripcio());
-        dataVisita.setText(monument.getDataVisita());
-        tipusMon.setText(monument.getTipusMonument());
-        anyConstr.setText(monument.getAnyConstruccio() + "");
+        dataVisita.setText("Visitat el dia: " + monument.getDataVisita());
+        tipusMon.setText("Tipus de monument: " + monument.getTipusMonument());
+        anyConstr.setText("Construït l'any "+ monument.getAnyConstruccio() + "");
 
         super.onResume();
     }
@@ -198,7 +205,17 @@ public class DetallMonument extends AppCompatActivity {
         // Notify the user that the text has been copied, you can customize this part
         Toast.makeText(this, "Ubicacio copiada al portaretalls", Toast.LENGTH_SHORT).show();
     }
-
+    public File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(getFilesDir().getPath()+"/images/");
+        File directori = new File(getFilesDir().getPath(), "/images/");
+        //Si no existeix el directori crear-lo
+        if (!directori.exists())
+            directori.mkdir();
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir );
+        return image;
+    }
     private void alertFoto() {
         AlertDialog.Builder builds = new AlertDialog.Builder(this);
         builds.setMessage("Vols pujar la foto de la galeria o de la camera?");
@@ -210,12 +227,28 @@ public class DetallMonument extends AppCompatActivity {
             }
         });
         builds.setPositiveButton("Càmera", new DialogInterface.OnClickListener() {
+
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("ProjF", "Foto de la càmera");
 
                 if ((checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                        temp_img = ""; //Atribut de classe de tipus String
+                        if (photoFile != null) {
+                            temp_img = photoFile.getName();
+                            Uri photoURI = FileProvider.getUriForFile(DetallMonument.this,"com.mydomain.fileprovider", photoFile);
+                            i.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            startActivityForResult(i, RESULT_CAPTURE_IMAGE);
+                        }
+                    } catch (IOException ex) {
+                        Log.e("AD_Media", ex.getMessage());
+                    }
+
                     userOption = 0;
                     startActivityForResult(i, RESULT_CAPTURE_IMAGE);
                 } else {
@@ -233,6 +266,7 @@ public class DetallMonument extends AppCompatActivity {
                     if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(i, RESULT_LOAD_GALERY_IMAGE);
+
                     } else {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_READ_STORAGE);
                     }
@@ -256,30 +290,22 @@ public class DetallMonument extends AppCompatActivity {
 
 
             if (resultCode == RESULT_OK) {
+                if (!this.temp_img.equals("")) {
+                    Uri uriImatge =Uri.fromFile(new File(getFilesDir().getPath()+"/images/"+this.temp_img));
+                    Log.i("ProjF",uriImatge.toString());
+                    imatge.setImageURI(uriImatge);
+                    this.temp_img = "";
 
-                ArrayList<Monument> monuments = singletone_monuments.getInstance().getModelM();
+                    ArrayList<Monument> monuments = singletone_monuments.getInstance().getModelM();
+                    Monument monument = monuments.get(numMon);
+                    monument.setUriImg(uriImatge.toString());
+                    singletone_monuments.getInstance().setArrayMons(monuments);
 
-
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-
-
-                imatge.setImageBitmap(photo);
-                FileOutputStream outputStream = null;
-
-                singletone_monuments.getInstance().setArrayMons(monuments);
-                /*try {
-                    outputStream = new FileOutputStream(new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "image.jpg"));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 }
-                photo.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                try {
-                    outputStream.close();
-                    Log.i("ProjF","Imatge guardada a"+Environment.DIRECTORY_PICTURES.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-                Toast.makeText(this, "La imatge no es guardarà al sortir de/tancar aquesta activitat", Toast.LENGTH_SHORT).show();
+
+
+
+
 
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -288,44 +314,28 @@ public class DetallMonument extends AppCompatActivity {
         } else if (userOption == 1) {
             if (resultCode == RESULT_OK) {
 
-                if (data != null) {
-                    Uri imageUri = data.getData();
+                if (requestCode == RESULT_LOAD_GALERY_IMAGE) {
+                    if (resultCode == RESULT_OK) {
+                        Uri imageUri = data.getData();
+                        try {
+                            Bitmap photo = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                            imatge.setImageBitmap(photo);
 
 
-                    try {
-                        Bitmap photo = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                        FileOutputStream outputStream = null;
-                        try {
-                            outputStream = new FileOutputStream(new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "image.jpg"));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        photo.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                        try {
-                            outputStream.close();
-                            imageUri = data.getData();
-                            Toast.makeText(DetallMonument.this, "La imatge no es guardarà al sortir de/tancar aquesta activitat", Toast.LENGTH_SHORT).show();
-                            Log.i("ProjF","Imatge guardada a"+Environment.DIRECTORY_PICTURES.toString());                    ArrayList<Monument> monuments = new ArrayList<Monument>();
-                            /*monuments = singletone_monuments.getInstance().getModelM();
-                            monuments.get(numMon).setImatge(imageUri.toString());
-                            singletone_monuments.getInstance().setArrayMons(monuments);*/
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        imatge.setImageBitmap(photo);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else if (resultCode == RESULT_CANCELED) {
+                        // Usuari ha cancelat la captura d'imatge
+                    } else {
+                        // La captura d'imatge a fallat, advertir a l'usuari
                     }
-                } else {
-
-
                 }
-            } else if (resultCode == RESULT_CANCELED) {
-                // User canceled the image selection
-            } else {
-                // Image selection failed
+                Toast.makeText(this, "La imatge no es guardarà al sortir de/tancar aquesta activitat", Toast.LENGTH_SHORT).show();
             }
         }
+
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

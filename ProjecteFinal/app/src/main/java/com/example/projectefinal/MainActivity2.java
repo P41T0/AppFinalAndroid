@@ -1,4 +1,4 @@
-package com.example.projectefinal;
+package com.example.pTort;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,8 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.Singletone.singletone_monuments;
+import com.example.pTort.Entities.Monument;
+import com.example.pTort.Singletone.singletone_monuments;
 
 import java.io.File;
 import java.io.FileNotFoundException;

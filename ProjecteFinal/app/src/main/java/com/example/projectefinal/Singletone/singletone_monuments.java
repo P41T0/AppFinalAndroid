@@ -1,12 +1,12 @@
-package com.example.projectefinal.Singletone;
+package com.example.pTort.Singletone;
 
 import static java.lang.System.in;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.R;
+import com.example.pTort.Entities.Monument;
+import com.example.pTort.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

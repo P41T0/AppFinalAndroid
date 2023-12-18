@@ -1,9 +1,12 @@
 package com.uvic.ad32023.pTort.Entities;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class Monument implements Serializable {
     private String nom;
+    private String uriImg;
     private int anyConstruccio;
     private String descripcio;
     private int imatge;
@@ -11,6 +14,8 @@ public class Monument implements Serializable {
     private boolean visitat;
     private String dataVisita;
     private String tipusMonument;
+
+
 
     public Monument(String nom, int anyConstruccio, String descripcio, String ubicacio, int imatge, boolean visitat, String dataVisita, String tipusMonument) {
         this.nom = nom;
@@ -22,7 +27,13 @@ public class Monument implements Serializable {
         this.dataVisita = dataVisita;
         this.tipusMonument = tipusMonument;
     }
+    public String getUriImg() {
+        return uriImg;
+    }
 
+    public void setUriImg(String uriImg) {
+        this.uriImg = uriImg;
+    }
     public String getDescripcio() {
         return descripcio;
     }

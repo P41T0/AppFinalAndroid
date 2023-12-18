@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectefinal.R;
 
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override

@@ -3,6 +3,7 @@ package com.uvic.ad32023.pTort.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.projectefinal.R;
 import com.uvic.ad32023.pTort.DetallMonument;
@@ -69,10 +71,13 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     int numMon = i;
 
-
-                    Drawable drawable = context.getDrawable(item.getImatge());
-                    vh.iv_image.setImageDrawable(drawable);
-                    // photo = Drawable.createFromStream(context.getContentResolver().openInputStream(uri), null);
+                    if(item.getUriImg()==null) {
+                        Drawable drawable = context.getDrawable(item.getImatge());
+                        vh.iv_image.setImageDrawable(drawable);
+                    }else {
+                        Uri uriImg = Uri.parse(item.getUriImg());
+                        vh.iv_image.setImageURI(uriImg);
+                    }
 
 
 

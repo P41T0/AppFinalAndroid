@@ -1,4 +1,4 @@
-package com.example.projectefinal.Entities;
+package com.example.pTort.Entities;
 
 import android.graphics.Bitmap;
 

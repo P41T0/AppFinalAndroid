@@ -1,4 +1,4 @@
-package com.example.projectefinal;
+package com.example.pTort;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,10 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.projectefinal.Adapter.Adapter_Monuments;
-import com.example.projectefinal.Adapter.Adapter_MonumentsNoVis;
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.Singletone.singletone_monuments;
+import com.example.pTort.Adapter.Adapter_Monuments;
+import com.example.pTort.Adapter.Adapter_MonumentsNoVis;
+import com.example.pTort.Entities.Monument;
+import com.example.pTort.Singletone.singletone_monuments;
 import com.google.zxing.Result;
 
 import java.sql.Date;

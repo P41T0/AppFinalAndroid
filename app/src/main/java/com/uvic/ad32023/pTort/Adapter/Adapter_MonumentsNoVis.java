@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.projectefinal.R;
 import com.uvic.ad32023.pTort.Entities.Monument;
 
@@ -58,13 +59,13 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
                 if (visitedPosition == position) {
                     // Bind data to views
                     vh.tv_nom.setText(item.getNom());
-
-
-
-                    Drawable drawable = context.getDrawable(item.getImatge());
-
-                    vh.iv_image.setImageDrawable(drawable);
-
+                    if(item.getUriImg()==null) {
+                        Drawable drawable = context.getDrawable(item.getImatge());
+                        vh.iv_image.setImageDrawable(drawable);
+                    }else {
+                        Uri uriImg = Uri.parse(item.getUriImg());
+                        vh.iv_image.setImageURI(uriImg);
+                    }
                     // OnItemClick
                     vh.layout.setOnClickListener(new View.OnClickListener() {
                         @Override

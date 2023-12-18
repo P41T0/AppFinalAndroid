@@ -3,6 +3,7 @@ package com.uvic.ad32023.pTort.Singletone;
 import android.content.Context;
 import android.util.Log;
 
+
 import com.example.projectefinal.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -103,12 +104,12 @@ public class singletone_monuments {
         } catch (FileNotFoundException e) {
             Log.i("ProjF","No existeix el fitxer");
             this.modelMons = new ArrayList<Monument>();
-            this.modelMons.add(new Monument("Pont Vell1", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda,true, "01-01-1970", "Pont"));
-            this.modelMons.add(new Monument("Pont Vell2", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda2,false, "01-01-1970", "Pont"));
-            this.modelMons.add(new Monument("Pont Vell3", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda2, false, "01-01-1970", "Pont"));
-            this.modelMons.add(new Monument("Pont Vell4", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda2, false, "01-01-1970", "Pont"));
-            this.modelMons.add(new Monument("Pont Vell5", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda2, false, "01-01-1970", "Pont"));
-            this.modelMons.add(new Monument("Pont Vell6", 2019, "Pont Vell de Roda de Ter", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda2,false, "01-01-1970", "Pont"));
+            this.modelMons.add(new Monument("Pont Vell", 2019, "Pont Vell de Roda de Ter. 'De pobles com Roda, no n'hi ha cap més d'igual, un pont sobre l'altre, i una esglèsia a cada cap'", "geo:0,0?q=41°58'48.6N, 2°18'28.9E", R.drawable.pont_vell_roda,true, "01-01-1970", "Pont"));
+            this.modelMons.add(new Monument("Jaciment arqueològic de l'Esquerda", -700, "Jaciment arqueològic ubicat a masies de Roda, en un dels meandres del Riu Ter", "geo:0,0?q=41°58'27.5N, 2°18'44.8E", R.drawable.esquerda,false, "01-01-1970", "Pont"));
+            this.modelMons.add(new Monument("Escola Mare de Déu del Sòl del Pont", 1935, "Escola pública de Roda de Ter. En aquesta escola hi va estudia el poata Miquel Martí i Pol durant la 2a República/Guerra Civil Espanyola", "geo:0,0?q=41°58'50.4N 2°18'21.2E", R.drawable.sol_del_pont, false, "01-01-1970", "Escola"));
+            this.modelMons.add(new Monument("Fundació Miquel Martí i Pol", 2019, "Casa/Museu de Miquel Martí i Pol. En aquesta casa hi va viure Miquel Martí i Pol quan treballava a La Blava", "geo:0,0?q=41°58'38.4N 2°18'24.9E", R.drawable.marti_i_pol, false, "01-01-1970", "Museu"));
+            this.modelMons.add(new Monument("Museu Arqueològic de l'Esquerda", 1977, "Museu on es mostren algunes de les troballes que s'han realitzat al jaciment arqueològic de l'esquerda. Anteriorment era la caserna de la Guardia Civil a Roda de Ter", "geo:0,0?q=41°58'37.1N 2°18'46.0E", R.drawable.museu_esquerda, false, "01-01-1970", "Museu"));
+            this.modelMons.add(new Monument("Fàbrica Tecla Sala 'La Blava'", 1925, "Antiga fàbrica, actualment abandonada, ubicada en un dels laterals del riu Ter al seu pas per Roda de Ter", "geo:0,0?q=41°58'39.3N 2°18'28.7E", R.drawable.la_blava,false, "01-01-1970", "Fàbrica tèxtil"));
             setFileMonuments(modelMons);
             e.printStackTrace();
         } catch (IOException e) {

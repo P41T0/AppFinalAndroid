@@ -1,4 +1,4 @@
-package com.example.projectefinal.Adapter;
+package com.example.pTort.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectefinal.Entities.Monument;
-import com.example.projectefinal.R;
+import com.example.pTort.Entities.Monument;
+import com.example.pTort.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

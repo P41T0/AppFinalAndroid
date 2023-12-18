@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.projectefinal'
+    namespace 'com.uvic.ad32023.pTort'
     compileSdk 34
     sourceSets {
         main {
@@ -11,7 +11,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.example.projectefinal"
+        applicationId "com.uvic.ad32023.pTort"
         minSdk 26
         targetSdk 34
         versionCode 1
