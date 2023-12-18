@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
-rootProject.name = "ProjecteFinal"
+rootProject.name = "EnaRoda't"
 include ':app'

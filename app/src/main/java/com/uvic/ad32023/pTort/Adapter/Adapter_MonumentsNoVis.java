@@ -58,7 +58,14 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
             if (!item.isVisitat()) {
                 if (visitedPosition == position) {
                     // Bind data to views
-                    vh.tv_nom.setText(item.getNom());
+                    int maxCarNom = 35;
+                    if (item.getNom().length()>maxCarNom){
+                        String textRetallat = item.getNom().substring(0, maxCarNom);
+                        vh.tv_nom.setText(textRetallat+"...");
+                    }
+                    else {
+                        vh.tv_nom.setText(item.getNom());
+                    }
                     if(item.getUriImg()==null) {
                         Drawable drawable = context.getDrawable(item.getImatge());
                         vh.iv_image.setImageDrawable(drawable);
@@ -106,7 +113,7 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
 
         public ViewHolder(View view) {
             super(view);
-            this.tv_nom = (TextView)view.findViewById(R.id.tv_name2);
+            this.tv_nom = (TextView)view.findViewById(R.id.nom_mon_novis);
 
             this.iv_image = (ImageView)view.findViewById(R.id.imatge);
             this.layout = (ConstraintLayout) view.findViewById(R.id.layout);

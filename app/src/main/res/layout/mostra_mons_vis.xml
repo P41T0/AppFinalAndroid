@@ -7,7 +7,7 @@
     android:layout_height="90dp">
 
     <TextView
-        android:id="@+id/tv_lastnames"
+        android:id="@+id/desc_mon_curt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -17,14 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/nom_mon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Image"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lastnames" />
+        app:layout_constraintTop_toBottomOf="@+id/desc_mon_curt" />
 
     <ImageView
         android:id="@+id/Image"
