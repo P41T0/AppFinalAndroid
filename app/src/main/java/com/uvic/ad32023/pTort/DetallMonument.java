@@ -31,7 +31,9 @@ import com.uvic.ad32023.pTort.Entities.Monument;
 import com.uvic.ad32023.pTort.Singletone.singletone_monuments;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -250,7 +252,7 @@ public class DetallMonument extends AppCompatActivity {
                     }
 
                     userOption = 0;
-                    startActivityForResult(i, RESULT_CAPTURE_IMAGE);
+
                 } else {
                     requestPermissions(new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
 
@@ -273,6 +275,7 @@ public class DetallMonument extends AppCompatActivity {
                 }else if (Build.VERSION.SDK_INT > 33){//Permís per a accedir a les fotos de la galeria Android 13
                     if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
                         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
                         startActivityForResult(i, RESULT_LOAD_GALERY_IMAGE);
                     } else {
                         requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, PERMISSION_REQUEST_READ_STORAGE);
@@ -317,18 +320,68 @@ public class DetallMonument extends AppCompatActivity {
                 if (requestCode == RESULT_LOAD_GALERY_IMAGE) {
                     if (resultCode == RESULT_OK) {
                         Uri imageUri = data.getData();
+
                         try {
                             Bitmap photo = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                             imatge.setImageBitmap(photo);
+                            /*if (Build.VERSION.SDK_INT<=30){
+                                ArrayList<Monument>monuments = new ArrayList<Monument>();
+                                monuments = singletone_monuments.getInstance().getModelM();
+                                Monument mon = monuments.get(numMon);
+                                mon.setUriImg(imageUri.toString());
+                                singletone_monuments.getInstance().setArrayMons(monuments);
+                            }
+                            else {
+                                Toast.makeText(this, "Les imatges no es poden guardar per a versions superiors a android 10 temporalment", Toast.LENGTH_SHORT).show();
+                            }*/
+
+                                // Obtén la uri de la imatge
+                                Uri uriImatge = data.getData();
+
+                                // Crea un nou objecte File que apunti a la carpeta imatges
+                            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                            String imageFileName = "JPEG_" + timeStamp + "_";
+                            File storageDir = new File(getFilesDir().getPath()+"/images/");
+                            File carpetaImatges = new File(getFilesDir().getPath(), "/images/");
+
+                                // Comprova si la carpeta existeix
+                                if (!carpetaImatges.exists()) {
+                                    // Crea la carpeta
+                                    carpetaImatges.mkdirs();
+                                }
+
+                                // Escriu la imatge al nou fitxer
+                                FileOutputStream outputStream = new FileOutputStream(new File(carpetaImatges, imageFileName));
+                                InputStream inputStream = getContentResolver().openInputStream(uriImatge);
+                                byte[] bytes = new byte[1024];
+                                int len;
+                                while ((len = inputStream.read(bytes)) != -1) {
+                                    outputStream.write(bytes, 0, len);
+                                }
+
+                                // Tanca els objectes d'entrada i sortida
+                                inputStream.close();
+                                outputStream.close();
+                            File savedImage = new File(carpetaImatges, imageFileName);
+
+
+                            Uri savedImageUri = Uri.fromFile(savedImage);
+                            ArrayList<Monument> monuments = singletone_monuments.getInstance().getModelM();
+                            Monument monument = monuments.get(numMon);
+                            monument.setUriImg(savedImageUri.toString());
+                            singletone_monuments.getInstance().setArrayMons(monuments);
+
+
+
 
 
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     } else if (resultCode == RESULT_CANCELED) {
-                        // Usuari ha cancelat la captura d'imatge
+
                     } else {
-                        // La captura d'imatge a fallat, advertir a l'usuari
+
                     }
                 }
                 Toast.makeText(this, "La imatge no es guardarà al sortir de/tancar aquesta activitat", Toast.LENGTH_SHORT).show();
