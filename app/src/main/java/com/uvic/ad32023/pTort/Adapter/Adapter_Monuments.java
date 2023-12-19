@@ -71,7 +71,7 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                     int maxCarNom = 25;
                     if (item.getNom().length()>maxCarNom){
-                        String textRetallat = item.getNom().substring(0, maxCaracters);
+                        String textRetallat = item.getNom().substring(0, maxCarNom);
                         vh.tv_nom.setText(textRetallat+"...");
                     }
                     else {
