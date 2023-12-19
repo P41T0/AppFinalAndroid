@@ -95,16 +95,15 @@ private ConstraintLayout contentFrame;
             monument = singletone_monuments.getInstance().getModelM();
             for (int i = 0; i<monument.size(); i++ ) {
                 Toast.makeText(this, textQR, Toast.LENGTH_SHORT).show();
-                // Comprovar si els noms coincideixen
+
                 if (monument.get(i).getNom().equals(textQR)) {
 
-                    // Comprovar si el monument no s'ha visitat
+
                     if (!monument.get(i).isVisitat()) {
 
-                        // Modificar el valor del camp `visitat`
                         monument.get(i).setVisitat(true);
 
-                        // Obtenir la data actual
+
                         Calendar calendar = Calendar.getInstance();
                         int dia = calendar.get(Calendar.DAY_OF_MONTH);
                         int mes = calendar.get(Calendar.MONTH) + 1;
@@ -151,7 +150,7 @@ private ConstraintLayout contentFrame;
         if (cameraOn) {
             stopCamera();
         } else {
-            // Estat per defecte
+
             super.onBackPressed();
         }
 }

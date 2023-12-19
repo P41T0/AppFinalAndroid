@@ -15,7 +15,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        final long DELAY = 2000; //5000 milisegons = 5 segons
+        final long DELAY = 2000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

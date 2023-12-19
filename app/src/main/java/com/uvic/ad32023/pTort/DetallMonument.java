@@ -219,7 +219,7 @@ public class DetallMonument extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(getFilesDir().getPath()+"/images/");
         File directori = new File(getFilesDir().getPath(), "/images/");
-        //Si no existeix el directori crear-lo
+
         if (!directori.exists())
             directori.mkdir();
         File image = File.createTempFile(imageFileName, ".jpg", storageDir );
