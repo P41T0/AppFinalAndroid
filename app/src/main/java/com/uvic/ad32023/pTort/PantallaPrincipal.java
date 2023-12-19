@@ -109,11 +109,8 @@ private ConstraintLayout contentFrame;
                         int dia = calendar.get(Calendar.DAY_OF_MONTH);
                         int mes = calendar.get(Calendar.MONTH) + 1;
                         int any = calendar.get(Calendar.YEAR);
-
-                        // Modificar el valor del camp `dataVisita`
                         monument.get(i).setDataVisita(String.format("%d/%d/%d", dia, mes, any));
 
-                        // Actualitzar l'array de monuments
                         singletone_monuments.getInstance().setArrayMons(monument);
 
                         model = singletone_monuments.getInstance().getModelM();
@@ -126,8 +123,6 @@ private ConstraintLayout contentFrame;
                         this.LlistaNoVis.setLayoutManager(ll_managerNoVis);
                         this.LlistaNoVis.setAdapter(noAdapter);
 
-
-                        // Sortir del bucle
                         break;
                     }
                 }
@@ -170,7 +165,8 @@ private ConstraintLayout contentFrame;
                startCamera();
             }else{
                 this.requestPermissions(new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
-            }}else{
+            }
+            }else{
                 stopCamera();
             }
             return true;

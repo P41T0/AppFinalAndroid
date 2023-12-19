@@ -102,7 +102,7 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
                         }
                     });
 
-                    break; // Exit the loop once the visited item is found
+                    break;
                 }
                 visitedPosition++;
             }

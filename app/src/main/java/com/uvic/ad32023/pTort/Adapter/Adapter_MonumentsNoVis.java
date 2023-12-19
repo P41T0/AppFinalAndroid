@@ -58,7 +58,8 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
             Monument item = this.model.get(i);
             if (!item.isVisitat()) {
                 if (visitedPosition == position) {
-                    // Bind data to views
+
+
                     int maxCarNom = 35;
                     if (item.getNom().length()>maxCarNom){
                         String textRetallat = item.getNom().substring(0, maxCarNom);
@@ -74,7 +75,7 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
                         Uri uriImg = Uri.parse(item.getUriImg());
                         vh.iv_image.setImageURI(uriImg);
                     }
-                    // OnItemClick
+
                     vh.layout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -83,12 +84,12 @@ public class Adapter_MonumentsNoVis extends RecyclerView.Adapter<RecyclerView.Vi
                             intent.setPackage("com.google.android.apps.maps");
                             context.startActivity(intent);
 
-                            // Notify the user that the text has been copied, you can customize this part
+
                             Toast.makeText(context, "Ubicacio copiada al portaretalls", Toast.LENGTH_SHORT).show();
                         }
                     });
 
-                    break; // Exit the loop once the visited item is found
+                    break;
                 }
                 visitedPosition++;
             }
