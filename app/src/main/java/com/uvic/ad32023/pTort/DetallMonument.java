@@ -185,7 +185,14 @@ public class DetallMonument extends AppCompatActivity {
 
 
         nomMonument.setText(monument.getNom());
-
+        if (monument.getUriImg()==null) {
+            Drawable drawable = getDrawable(monument.getImatge());
+            imatge.setImageDrawable(drawable);
+        }
+        else{
+            Uri imgUri = Uri.parse(monument.getUriImg());
+            imatge.setImageURI(imgUri);
+        }
         descripcio.setText(monument.getDescripcio());
         dataVisita.setText("Visitat el dia: " + monument.getDataVisita());
         tipusMon.setText("Tipus de monument: " + monument.getTipusMonument());
@@ -324,34 +331,23 @@ public class DetallMonument extends AppCompatActivity {
                         try {
                             Bitmap photo = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                             imatge.setImageBitmap(photo);
-                            /*if (Build.VERSION.SDK_INT<=30){
-                                ArrayList<Monument>monuments = new ArrayList<Monument>();
-                                monuments = singletone_monuments.getInstance().getModelM();
-                                Monument mon = monuments.get(numMon);
-                                mon.setUriImg(imageUri.toString());
-                                singletone_monuments.getInstance().setArrayMons(monuments);
-                            }
-                            else {
-                                Toast.makeText(this, "Les imatges no es poden guardar per a versions superiors a android 10 temporalment", Toast.LENGTH_SHORT).show();
-                            }*/
 
-                                // Obtén la uri de la imatge
                                 Uri uriImatge = data.getData();
 
-                                // Crea un nou objecte File que apunti a la carpeta imatges
+
                             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                            String imageFileName = "JPEG_" + timeStamp + "_";
+                            String nomArxiuImg = "JPEG_" + timeStamp + "_";
                             File storageDir = new File(getFilesDir().getPath()+"/images/");
                             File carpetaImatges = new File(getFilesDir().getPath(), "/images/");
 
-                                // Comprova si la carpeta existeix
+
                                 if (!carpetaImatges.exists()) {
-                                    // Crea la carpeta
+
                                     carpetaImatges.mkdirs();
                                 }
 
-                                // Escriu la imatge al nou fitxer
-                                FileOutputStream outputStream = new FileOutputStream(new File(carpetaImatges, imageFileName));
+
+                                FileOutputStream outputStream = new FileOutputStream(new File(carpetaImatges, nomArxiuImg));
                                 InputStream inputStream = getContentResolver().openInputStream(uriImatge);
                                 byte[] bytes = new byte[1024];
                                 int len;
@@ -359,10 +355,10 @@ public class DetallMonument extends AppCompatActivity {
                                     outputStream.write(bytes, 0, len);
                                 }
 
-                                // Tanca els objectes d'entrada i sortida
+
                                 inputStream.close();
                                 outputStream.close();
-                            File savedImage = new File(carpetaImatges, imageFileName);
+                            File savedImage = new File(carpetaImatges, nomArxiuImg);
 
 
                             Uri savedImageUri = Uri.fromFile(savedImage);
