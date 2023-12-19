@@ -60,13 +60,13 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
             Monument item = this.model.get(i);
             if (item.isVisitat()) {
                 if (visitedPosition == position) {
-                    // Bind data to views
+
                     int maxCaracters = 30;
                     if (item.getDescripcio().length()>maxCaracters){
                         String textRetallat = item.getDescripcio().substring(0, maxCaracters);
-                        vh.tv_cognom.setText(textRetallat+"...");
+                        vh.tv_descripcio.setText(textRetallat+"...");
                     }else {
-                        vh.tv_cognom.setText(item.getDescripcio());
+                        vh.tv_descripcio.setText(item.getDescripcio());
 
                     }
                     int maxCarNom = 25;
@@ -90,8 +90,6 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
 
 
-
-                    // OnItemClick
                     vh.layout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -122,14 +120,14 @@ public class Adapter_Monuments extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tv_nom;
-        final TextView tv_cognom;
+        final TextView tv_descripcio;
         final ImageView iv_image;
         final ConstraintLayout layout;
 
         public ViewHolder(View view) {
             super(view);
             this.tv_nom = (TextView)view.findViewById(R.id.nom_mon);
-            this.tv_cognom = (TextView)view.findViewById(R.id.desc_mon_curt);
+            this.tv_descripcio = (TextView)view.findViewById(R.id.desc_mon_curt);
             this.iv_image = (ImageView)view.findViewById(R.id.Image);
             this.layout = (ConstraintLayout) view.findViewById(R.id.layout);
         }
