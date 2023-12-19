@@ -1,10 +1,12 @@
 package com.uvic.ad32023.pTort;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,10 @@ private ConstraintLayout contentFrame;
         this.LlistaNoVis.setLayoutManager(ll_managerNoVis);
         this.LlistaNoVis.setAdapter(noAdapter);
     }
+    public void PantallaPersonal(View view){
+        Intent i = new Intent(this, PauTort.class);
+        startActivity(i);
+    }
     @Override
     public void onResume() {
         model = singletone_monuments.getInstance().getModelM();
@@ -84,7 +90,7 @@ private ConstraintLayout contentFrame;
         if (rawResult!=null) {
             String textQR = rawResult.getText();
 
-// Iterar per l'array de monuments
+
             ArrayList<Monument> monument = new ArrayList<Monument>();
             monument = singletone_monuments.getInstance().getModelM();
             for (int i = 0; i<monument.size(); i++ ) {

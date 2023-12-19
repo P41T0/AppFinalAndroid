@@ -5,12 +5,16 @@
     <item
         android:id="@+id/editButton"
         android:icon="@drawable/ic_baseline_mode_edit_24"
+        android:iconTint="@color/grocBand"
+        android:iconTintMode="src_in"
         android:title="Modificar elements"
         android:visible="true"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/deleteButton"
         android:icon="@drawable/ic_baseline_location_off_24"
+        android:iconTint="@color/grocBand"
+        android:iconTintMode="src_in"
         android:title="Eliminar ubicació"
         app:showAsAction="ifRoom" />
 </menu>

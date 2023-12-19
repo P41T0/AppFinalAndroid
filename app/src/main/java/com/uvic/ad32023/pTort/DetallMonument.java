@@ -211,7 +211,7 @@ public class DetallMonument extends AppCompatActivity {
         intent.setPackage("com.google.android.apps.maps");
         startActivity(intent);
 
-        // Notify the user that the text has been copied, you can customize this part
+
         Toast.makeText(this, "Ubicacio copiada al portaretalls", Toast.LENGTH_SHORT).show();
     }
     public File createImageFile() throws IOException {
@@ -247,7 +247,7 @@ public class DetallMonument extends AppCompatActivity {
                     File photoFile = null;
                     try {
                         photoFile = createImageFile();
-                        temp_img = ""; //Atribut de classe de tipus String
+                        temp_img = "";
                         if (photoFile != null) {
                             temp_img = photoFile.getName();
                             Uri photoURI = FileProvider.getUriForFile(DetallMonument.this,"com.mydomain.fileprovider", photoFile);
@@ -326,17 +326,18 @@ public class DetallMonument extends AppCompatActivity {
 
                 if (requestCode == RESULT_LOAD_GALERY_IMAGE) {
                     if (resultCode == RESULT_OK) {
-                        Uri imageUri = data.getData();
+
 
                         try {
+                            Uri imageUri = data.getData();
                             Bitmap photo = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                             imatge.setImageBitmap(photo);
 
-                                Uri uriImatge = data.getData();
+
 
 
                             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                            String nomArxiuImg = "JPEG_" + timeStamp + "_";
+                            String nomArxiuImg = "JPEG_" + timeStamp + "_.jpg";
                             File storageDir = new File(getFilesDir().getPath()+"/images/");
                             File carpetaImatges = new File(getFilesDir().getPath(), "/images/");
 
@@ -348,7 +349,7 @@ public class DetallMonument extends AppCompatActivity {
 
 
                                 FileOutputStream outputStream = new FileOutputStream(new File(carpetaImatges, nomArxiuImg));
-                                InputStream inputStream = getContentResolver().openInputStream(uriImatge);
+                                InputStream inputStream = getContentResolver().openInputStream(imageUri);
                                 byte[] bytes = new byte[1024];
                                 int len;
                                 while ((len = inputStream.read(bytes)) != -1) {
@@ -366,11 +367,6 @@ public class DetallMonument extends AppCompatActivity {
                             Monument monument = monuments.get(numMon);
                             monument.setUriImg(savedImageUri.toString());
                             singletone_monuments.getInstance().setArrayMons(monuments);
-
-
-
-
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -380,7 +376,7 @@ public class DetallMonument extends AppCompatActivity {
 
                     }
                 }
-                Toast.makeText(this, "La imatge no es guardarà al sortir de/tancar aquesta activitat", Toast.LENGTH_SHORT).show();
+
             }
         }
 
@@ -404,17 +400,16 @@ public class DetallMonument extends AppCompatActivity {
             }
         }
 
-       /*if (requestCode == PERMISSION_REQUEST_READ_STORAGE) {
+       if (requestCode == PERMISSION_REQUEST_READ_STORAGE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                uploadPhoto();
+
             }
-            // Usuari ok
+
         }else{
-// Usuari ko
-// No se’ns ha otorgat permís, aquesta funcionalitat no està habilitada
+
         }
 
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);*/
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
