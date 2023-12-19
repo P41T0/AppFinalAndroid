@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.projectefinal.R;
+
 import com.google.zxing.Result;
 import com.uvic.ad32023.pTort.Adapter.Adapter_Monuments;
 import com.uvic.ad32023.pTort.Adapter.Adapter_MonumentsNoVis;

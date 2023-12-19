@@ -4,10 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 
-import com.example.projectefinal.R;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.uvic.ad32023.pTort.Entities.Monument;
+import com.uvic.ad32023.pTort.R;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

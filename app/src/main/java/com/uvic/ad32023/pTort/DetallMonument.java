@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 
-import com.example.projectefinal.R;
+
 import com.uvic.ad32023.pTort.Entities.Monument;
 import com.uvic.ad32023.pTort.Singletone.singletone_monuments;
 

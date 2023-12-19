@@ -15,9 +15,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.projectefinal.R;
+
 import com.uvic.ad32023.pTort.DetallMonument;
 import com.uvic.ad32023.pTort.Entities.Monument;
+import com.uvic.ad32023.pTort.R;
 
 import java.util.ArrayList;
 
